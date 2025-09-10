@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>QCM : Évolution des Styles Architecturaux</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f4f4f4;
+      margin: 0;
+      padding: 20px;
+      color: #333;
+    }
+    h1 {
+      text-align: center;
+      color: #2c3e50;
+    }
+    .quiz-container {
+      max-width: 800px;
+      margin: auto;
+      background: #fff;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    .question {
+      margin-bottom: 20px;
+    }
+    .question h3 {
+      margin-bottom: 10px;
+    }
+    label {
+      display: block;
+      margin-bottom: 5px;
+      cursor: pointer;
+    }
+    input[type="radio"] {
+      margin-right: 10px;
+    }
+    button {
+      background: #2980b9;
+      color: #fff;
+      border: none;
+      padding: 12px 20px;
+      font-size: 16px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    button:hover {
+      background: #3498db;
+    }
+    .result {
+      margin-top: 30px;
+      padding: 20px;
+      background: #ecf0f1;
+      border-radius: 5px;
+    }
+    .correct {
+      color: green;
+    }
+    .incorrect {
+      color: red;
+    }
+    .disabled {
+      pointer-events: none;
+      opacity: 0.6;
+    }
+  </style>
+</head>
+<body>
+  <div class="quiz-container">
+    <h1>QCM : Évolution des Styles Architecturaux</h1>
+    <form id="quizForm">
+      <!-- Question 1 -->
+      <div class="question">
+        <h3>1. Quelle caractéristique est typique de l'architecture romane ?</h3>
+        <label><input type="radio" name="q1" value="a"> Utilisation de l'acier et du verre</label>
+        <label><input type="radio" name="q1" value="b"> Arcs en ogive et vitraux colorés</label>
+        <label><input type="radio" name="q1" value="c"> Voûtes en berceau et murs épais</label>
+        <label><input type="radio" name="q1" value="d"> Façades en verre et structures légères</label>
+      </div>
+      <!-- Question 2 -->
+      <div class="question">
+        <h3>2. Quel style architectural est connu pour ses arcs-boutants et ses vitraux colorés ?</h3>
+        <label><input type="radio" name="q2" value="a"> Roman</label>
+        <label><input type="radio" name="q2" value="b"> Gothique</label>
+        <label><input type="radio" name="q2" value="c"> Renaissance</label>
+        <label><input type="radio" name="q2" value="d"> Baroque</label>
+      </div>
+      <!-- Question 3 -->
+      <div class="question">
+        <h3>3. Quel architecte est associé à l'architecture moderne et a conçu la Villa Savoye ?</h3>
+        <label><input type="radio" name="q3" value="a"> Le Corbusier</label>
+        <label><input type="radio" name="q3" value="b"> Frank Lloyd Wright</label>
+        <label><input type="radio" name="q3" value="c"> Ludwig Mies van der Rohe</label>
+        <label><input type="radio" name="q3" value="d"> Zaha Hadid</label>
+      </div>
+      <!-- Question 4 -->
+      <div class="question">
+        <h3>4. Quelle période marque le retour aux ordres classiques et à la symétrie en architecture ?</h3>
+        <label><input type="radio" name="q4" value="a"> Moyen Âge</label>
+        <label><input type="radio" name="q4" value="b"> Renaissance</label>
+        <label><input type="radio" name="q4" value="c"> Baroque</label>
+        <label><input type="radio" name="q4" value="d"> Moderne</label>
+      </div>
+      <!-- Question 5 -->
+      <div class="question">
+        <h3>5. Quel style architectural privilégie les lignes épurées et l'utilisation du béton brut ?</h3>
+        <label><input type="radio" name="q5" value="a"> Art nouveau</label>
+        <label><input type="radio" name="q5" value="b"> Brutalisme</label>
+        <label><input type="radio" name="q5" value="c"> Rococo</label>
+        <label><input type="radio" name="q5" value="d"> Néo-classicisme</label>
+      </div>
+      <!-- Question 6 -->
+      <div class="question">
+        <h3>6. Quelle caractéristique est associée à l'architecture contemporaine ?</h3>
+        <label><input type="radio" name="q6" value="a"> Colonnes doriques</label>
+        <label><input type="radio" name="q6" value="b"> Arcs en plein cintre</label>
+        <label><input type="radio" name="q6" value="c"> Utilisation de matériaux durables et formes innovantes</label>
+        <label><input type="radio" name="q6" value="d"> Murs épais et petites fenêtres</label>
+      </div>
+      <button type="button" onclick="submitQuiz()">Valider</button>
+    </form>
+    <div id="result" class="result" style="display:none;"></div>
+  </div>
+
+  <script>
+    const answers = {
+      q1: 'c',
+      q2: 'b',
+      q3: 'a',
+      q4: 'b',
+      q5: 'b',
+      q6: 'c'
+    };
+
+    function submitQuiz() {
+      const form = document.getElementById('quizForm');
+      let score = 0;
+      let output = '';
+      for (let i = 1; i <= 6; i++) {
+        const q = 'q' + i;
+        const selected = form[q].value;
+        const correct = answers[q];
+        const questionElem = form.querySelector('input[name="' + q + '"][value="' + selected + '"]');
+        if (selected === correct) {
+          score++;
+          output += `<p><strong>Question ${i} :</strong> <span class="correct">Bonne réponse</span></p>`;
+        } else {
+          output += `<p><strong>Question ${i} :</strong> <span class="incorrect">Mauvaise réponse</span> (Bonne réponse : ${correct.toUpperCase()})</p>`;
+        }
+      }
+      document.getElementById('result').innerHTML = `<h3>Votre score : ${score}/6</h3>` + output;
+      document.getElementById('result').style.display = 'block';
+      // Désactiver toutes les entrées
+      const inputs = form.querySelectorAll('input[type="radio"]');
+      inputs.forEach(input => input.disabled = true);
+      // Désactiver le bouton
+      form.querySelector('button').disabled = true;
+    }
+  </script>
+</body>
+</html>
